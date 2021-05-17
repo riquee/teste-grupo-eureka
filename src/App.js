@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import getFetch from './services/api';
-const App = () => {
-  const [countries, setCountries] = useState([]);
+import React, { useState, createContext } from 'react';
+import ListCountries from './components/ListCountries';
 
-  useEffect(() => {
-    getFetch().then((resp) => {
-      const listCountries = resp.map(({ translations: { br } }) => br);
-      setCountries(listCountries);
-    })
-  },[])
+const GLOBAL_STATE = {
+  countries: [],
+  favorites: [],
+};
+
+export const GlobalContext = createContext();
+
+const App = () => {
+  const [state, setState] = useState([]);
 
   return (
-    <div>
-      
-    </div>
+    <GlobalContext.Provider value={{ state, setState }}>
+      <ListCountries></ListCountries>
+    </GlobalContext.Provider>
   );
 };
 
