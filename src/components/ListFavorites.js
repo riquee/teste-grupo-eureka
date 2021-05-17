@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../App';
 
-const ListCountries = () => {
+const ListFavorites = () => {
   const {
     state,
-    state: { countries },
+    state: { countries, favorites },
     setState,
   } = useContext(GlobalContext);
 
@@ -18,12 +18,16 @@ const ListCountries = () => {
   };
 
   const renderList = () => {
-    return countries.map(({ name, favorite }, index) => (
+    return favorites.map(({ name, favorite }, index) => (
       <li key={`${name} - ${index}`}>
         <p>
           {name}
-          <button disabled={favorite} type="button" onClick={() => onChangeCountry(name)}>
-            Adicionar favoritos
+          <button
+            disabled={!favorite}
+            type="button"
+            onClick={() => onChangeCountry(name)}
+          >
+            Remover dos favoritos
           </button>
         </p>
       </li>
@@ -32,10 +36,10 @@ const ListCountries = () => {
 
   return (
     <div className="countries">
-      <h2>Countries</h2>
+      <h2>Favorites</h2>
       <ul>{renderList()}</ul>
     </div>
   );
 };
 
-export default ListCountries;
+export default ListFavorites;

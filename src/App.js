@@ -1,6 +1,7 @@
 import React, { useState, createContext, useEffect } from 'react';
 import getFetch from './services/api';
 import ListCountries from './components/ListCountries';
+import ListFavorites from './components/ListFavorites'
 
 const GLOBAL_STATE = {
   countries: [],
@@ -24,7 +25,8 @@ const App = () => {
 
   return (
     <GlobalContext.Provider value={{ state, setState }}>
-      <ListCountries></ListCountries>
+      <ListCountries/>
+      <ListFavorites/>
     </GlobalContext.Provider>
   );
 };
