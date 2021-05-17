@@ -1,16 +1,40 @@
-import React, { useContext, useEffect } from 'react';
-import getFetch from '../services/api';
+import React, { useContext } from 'react';
 import { GlobalContext } from '../App';
 const ListCountries = () => {
-  const { state, setState } = useContext(GlobalContext);
+  const {
+    state,
+    state: { countries },
+    setState,
+  } = useContext(GlobalContext);
 
-  useEffect(() => {
-    getFetch().then((resp) => {
-      const countries = resp.map(({ translations: { br } }) => br);
-      setState({...state, countries });
+  const onChangeCountry = (name) => {
+    const update = countries.map((country) => {
+      if (country.name === name) return { ...country, favorite: !country.favorite };
+      return country;
     });
-  }, [state, setState]);
-  return <div>Oi</div>;
+    const favorites = update.filter(({ favorite }) => favorite);
+    setState({ ...state, countries: update, favorites });
+  };
+
+  const renderList = () => {
+    return countries.map(({ name, favorite }, index) => (
+      <li key={`${name} - ${index}`}>
+        <p>
+          {name}
+          <button disabled={favorite} type="button" onClick={() => onChangeCountry(name)}>
+            Adicionar favoritos
+          </button>
+        </p>
+      </li>
+    ));
+  };
+
+  return (
+    <div className="countries">
+      <h2>Countries</h2>
+      <ul>{renderList()}</ul>
+    </div>
+  );
 };
 
 export default ListCountries;
