@@ -1,7 +1,8 @@
 import React, { useState, createContext, useEffect } from 'react';
-import getFetch from './services/api';
 import ListCountries from './components/ListCountries';
-import ListFavorites from './components/ListFavorites'
+import ListFavorites from './components/ListFavorites';
+import getFetch from './services/api';
+import './App.css';
 
 const GLOBAL_STATE = {
   countries: [],
@@ -13,7 +14,7 @@ export const GlobalContext = createContext();
 const App = () => {
   const [state, setState] = useState(GLOBAL_STATE);
 
-  useEffect( () => {
+  useEffect(() => {
     getFetch().then((resp) => {
       const countries = resp.map(({ translations: { br: name } }) => ({
         name,
@@ -25,8 +26,10 @@ const App = () => {
 
   return (
     <GlobalContext.Provider value={{ state, setState }}>
-      <ListCountries/>
-      <ListFavorites/>
+      <div className="container">
+        <ListCountries />
+        <ListFavorites />
+      </div>
     </GlobalContext.Provider>
   );
 };
