@@ -8,7 +8,7 @@ const Country = ({ isFavorite, country, country: { favorite, name } }) => {
         <Button name={name} content="Adicionar aos Favoritos" favorite={favorite} />
       )}
       {isFavorite && (
-        <Button name={name} content="Adicionar aos Favoritos" favorite={!favorite} />
+        <Button name={name} content="Remover dos Favoritos" favorite={!favorite} />
       )}
     </li>
   );
