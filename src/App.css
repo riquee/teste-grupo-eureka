@@ -1,0 +1,36 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #7E8F13;
+}
+.container{
+  display: flex;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.list h2 {
+  color: #294006;
+  font-weight: bold;
+}
+.cart {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 3px 0;
+}
+
+.cart button {
+  border: 1px solid;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+}
