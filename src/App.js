@@ -15,13 +15,10 @@ const App = () => {
   const [state, setState] = useState(GLOBAL_STATE);
 
   useEffect(() => {
-    getFetch().then((resp) => {
-      const countries = resp.map(({ translations: { br: name } }) => ({
-        name,
-        favorite: false,
-      }));
-      setState({ ...state, countries });
-    });
+    getFetch().then((countries) => {
+      console.log(countries);
+      setState((state) => ({...state, countries}))
+    })
   }, []);
 
   return (
